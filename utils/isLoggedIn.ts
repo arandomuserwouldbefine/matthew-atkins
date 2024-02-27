@@ -16,7 +16,14 @@ const isAuthenticated = async(cookieValue : string) =>{
     }
 }
 
-
+export const isAlreadyLoggedIn = async()=>{
+    const authCookie = cookies().get("auth")?.value ?? ""
+    const isLoggedIn = await isAuthenticated(authCookie)
+    if(isLoggedIn){
+        return redirect("/admin/home")
+    }
+    return null
+}
 
 export const isAllowed = async() =>{
     const authCookie = cookies().get("auth")?.value ?? ""
@@ -24,5 +31,5 @@ export const isAllowed = async() =>{
     if(isLoggedIn){
         return null
     }
-    return redirect("/admin/auth/login")
+    return redirect("/admin/login")
 }
