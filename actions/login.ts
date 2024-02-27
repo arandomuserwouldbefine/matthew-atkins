@@ -12,6 +12,7 @@ const hashPassword = async (password: string) => {
   };
 const prisma = new PrismaClient()
 export const login =async (values: z.infer<typeof LoginSchema>) =>{
+    cookies()
     const validateFields = LoginSchema.safeParse(values);
     if(!validateFields.success){
         return {error: "Invalid fields!"}
