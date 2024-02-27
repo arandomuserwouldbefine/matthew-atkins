@@ -4,7 +4,7 @@ export async function encryptPassword(password: string): Promise<string> {
   return argon2.hash(password);
 }
 
-export async function verifyPassword(
+export  function verifyPassword(
   hash: string,
   password: string
 ): Promise<boolean> {
