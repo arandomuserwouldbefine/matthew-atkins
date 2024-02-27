@@ -1,6 +1,10 @@
+import { cookies } from "next/headers";
 import { verifyPassword } from "./signCookie";
+import { NextResponse } from "next/server";
+import type { NextRequest } from 'next/server'
+import { redirect } from 'next/navigation'
 
-export const isAuthenticated = async(cookieValue : string) =>{
+const isAuthenticated = async(cookieValue : string) =>{
     try{
         const encryptedValue = decodeURIComponent(cookieValue)
         const password: string = process.env.PASSWORD ?? '';
@@ -10,5 +14,15 @@ export const isAuthenticated = async(cookieValue : string) =>{
     catch(e){
         return false;
     }
+}
 
+
+
+export const isAllowed = async() =>{
+    const authCookie = cookies().get("auth")?.value ?? ""
+    const isLoggedIn = await isAuthenticated(authCookie)
+    if(isLoggedIn){
+        return null
+    }
+    return redirect("/admin/auth/login")
 }
