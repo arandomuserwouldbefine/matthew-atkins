@@ -7,12 +7,20 @@ import { adminLoginRoute,adminDashboardRoutes } from './routes'
 
 
 export function middleware(request: NextRequest) {
-  if(adminDashboardRoutes.includes(request.nextUrl.pathname)){
-    console.log(request.nextUrl.pathname)
+  let pathName = request.nextUrl.pathname
+  if(adminDashboardRoutes.includes(pathName)){
+    console.log(pathName)
     if(!isAuthenticated(request)){
         return NextResponse.redirect(new URL('/admin/login', request.url))
     }
     return null;
+  }
+
+  if(adminLoginRoute.includes(pathName)){
+    if(isAuthenticated(request)){
+        console.log("Middleware invoked in login")
+        return NextResponse.redirect(new URL("/admin/home",request.url))
+    }
   }
   
 
