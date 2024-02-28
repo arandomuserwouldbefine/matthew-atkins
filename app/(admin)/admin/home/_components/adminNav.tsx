@@ -22,6 +22,11 @@ export const AdminNav = async ()=>{
                 <div className="font-semibold">
                     <h1>Matt Atkins</h1>
                 </div>
+                <div className="flex space-x-5 items-start">
+                    <h1>Upload Image</h1>
+                    <h1>Manage Images</h1>
+
+                </div>
                 <LogOutBtn /> 
             </div>
         </>
