@@ -6,6 +6,7 @@ import { SHA256 as sha256 } from "crypto-js";
 import { db } from "@/lib/db";
 import { cookies } from 'next/headers'
 import { encryptPassword, verifyPassword } from '@/utils/signCookie';
+import { redirect } from 'next/navigation';
 
 const hashPassword = async (password: string) => {
     return sha256(password).toString();
@@ -34,7 +35,7 @@ export const login =async (values: z.infer<typeof LoginSchema>) =>{
 
     if(doesEmailAndPassExists){
         cookies().set("auth",encryptedCookie)
-        return {success: "Logged in Successfully!"}
+        return redirect("/admin/home")
     }
     else{
         return {error: "Invalid credentials"}

@@ -1,7 +1,6 @@
-import { logOut } from "@/actions/logout";
-
+"use server"
 export default async function lgOut(){
     return(
-        logOut()
+        <h1>Logging Out...</h1>
     )
 }

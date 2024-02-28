@@ -1,4 +1,5 @@
 "use client"
+import { LogOutBtn } from "@/components/auth/logOut"
 import { Button } from "@/components/ui/button"
 import {
     NavigationMenu,
@@ -21,9 +22,7 @@ export const AdminNav = async ()=>{
                 <div className="font-semibold">
                     <h1>Matt Atkins</h1>
                 </div>
-                <Link href="/admin/logout">
-                    <Button variant="destructive" size="sm">Log Out</Button>           
-                </Link>
+                <LogOutBtn /> 
             </div>
         </>
         
