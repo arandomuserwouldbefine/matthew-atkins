@@ -3,7 +3,6 @@
 @tailwind utilities;
  
 
-
 html
 ,body,:root{
   height: 100%;
@@ -80,4 +79,12 @@ html
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.work-sans{
+  font-family: var(--font-workSans);
+}
+
+.kalnia{
+  font-family: var(--font-kalnia);
 }
