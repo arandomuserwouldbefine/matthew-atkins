@@ -5,6 +5,6 @@ import { redirect } from "next/navigation"
 export default async function lgOut(){
     return(
 
-        redirect("/admin/login")
+        <h1>Logging out...</h1>
     )
 }
