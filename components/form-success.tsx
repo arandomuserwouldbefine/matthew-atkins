@@ -15,7 +15,7 @@ export const FormSuccess = ({
             </CheckCircledIcon>
             <p>
                     {message}
-                </p>
+            </p>
         </div>
     )
 }

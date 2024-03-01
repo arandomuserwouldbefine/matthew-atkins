@@ -3,7 +3,7 @@ import Header from "@/components/header";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
   return (
     <main>
       <section className="bg-black text-white p-2 py-5">
