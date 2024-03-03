@@ -29,9 +29,10 @@ export default async function ManageImages() {
                 image_url: string
             }, index: number) => (
                 <div key={index} className="my-5 p-3 flex items-center justify-between border-2 border-gray-900">
-                    <img src={image.image_url} height={50} width={50} />
-                    <h1>{image.title}</h1>
-                    <h2>{image.description}</h2>
+                        <img src={image.image_url} height={50} width={50} />
+                        <h1>{image.title}</h1>
+                        <h2>{image.description}</h2>
+                        <Button variant='destructive' size="sm">Delete</Button>
                 </div>
             ))}
             </div>
