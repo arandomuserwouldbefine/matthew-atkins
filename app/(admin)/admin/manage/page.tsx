@@ -15,6 +15,7 @@ async function getImages(){
     const data = await fetch(`${protocol}://${url}/api/images`,{
         method: "POST"
     })
+    console.log(" ")
     const result = data.json()
     return result
 }
