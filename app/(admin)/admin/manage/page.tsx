@@ -20,15 +20,7 @@ async function getImages(){
     return result
 }
 
-async function DeleteImage(id: number): Promise<DeleteImageResponse>{
-    const deleteRequest = await fetch(`${protocol}://${url}/api/images`,{
-        method: "POST",
-        body: JSON.stringify({
-            id: id
-        })
-    })
-    return deleteRequest.json()
-}
+
 
 export default async function ManageImages(){
     const images = await getImages()
