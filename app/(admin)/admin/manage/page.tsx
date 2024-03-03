@@ -4,18 +4,13 @@ import { AdminNav } from "../home/_components/adminNav"
 const url = process.env.URL
 const protocol = process.env.PROTOCOL
 
-interface DeleteImageResponse {
-    success: boolean; // Assuming the response contains a field indicating success
-    message?: string; // Optional message field
-    // Add other fields as needed
-}
+
 
 
 async function getImages(){
     const data = await fetch(`${protocol}://${url}/api/images`,{
         method: "POST"
     })
-    console.log(" ")
     const result = data.json()
     return result
 }
@@ -27,7 +22,7 @@ export default async function ManageImages(){
     return(
         <>
         <AdminNav/>
-        {images.data.map((image:{
+        {images.imageData.map((image:{
             id: number,
             title: string,
             description: string,
