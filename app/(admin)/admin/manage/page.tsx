@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { AdminNav } from "../home/_components/adminNav"
+import { cookies } from "next/headers"
 
 const url = process.env.URL
 const protocol = process.env.PROTOCOL
 
 
 async function fetchImages(){
+    cookies()
     const request = await fetch(`${protocol}://${url}/api/images`,{
         method:"POST" 
     })
