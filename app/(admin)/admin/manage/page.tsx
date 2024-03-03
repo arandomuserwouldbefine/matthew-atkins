@@ -14,12 +14,22 @@ async function fetchImages(){
 
 
 
-export default async function ManageImages(){
-    const images = await fetchImages()
-    return(
+export default async function ManageImages() {
+    const images = await fetchImages();
+    return (
         <>
-        <AdminNav/>
-        {JSON.stringify(images)}
+            <AdminNav />
+            {images.data.map((image: {
+                id: number,
+                title: string,
+                description: string,
+                image_url: string
+            }, index: number) => (
+                <div key={index}>
+                    <h1>{image.title}</h1>
+                    <h2>{image.description}</h2>
+                </div>
+            ))}
         </>
-        )
+    );
 }
