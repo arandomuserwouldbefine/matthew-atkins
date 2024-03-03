@@ -19,17 +19,20 @@ export default async function ManageImages() {
     return (
         <>
             <AdminNav />
+            <div className="p-5">
             {images.data.map((image: {
                 id: number,
                 title: string,
                 description: string,
                 image_url: string
             }, index: number) => (
-                <div key={index}>
+                <div key={index} className="my-5 p-3 flex items-center justify-between border-2 border-gray-900">
+                    <img src={image.image_url} height={50} width={50} />
                     <h1>{image.title}</h1>
                     <h2>{image.description}</h2>
                 </div>
             ))}
+            </div>
         </>
     );
 }
