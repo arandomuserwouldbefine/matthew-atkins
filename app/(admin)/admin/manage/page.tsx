@@ -7,23 +7,23 @@ import { DeleteBtn } from "../home/_components/deleteButton"
 const url = process.env.URL
 const protocol = process.env.PROTOCOL
 
-
+export const dynamic = 'force-dynamic'
 async function fetchImages(){
-    cookies()
-    const allItems = await db.images.findMany()
-    return allItems
+    const allItems = await fetch(`${protocol}://${url}/api/images`, { cache: 'no-store' })
+    const res = allItems.json()
+    return res
 }
 
 
 
 export default async function ManageImages() {
+    cookies()
     const images = await fetchImages();
 
     return (
         <>
             <div className="p-5">
-                
-            {images.length> 0?images.map((image: {
+            {images.imageDetails.length> 0?images.imageDetails.map((image: {
                 id: string,
                 title: string,
                 description: string,

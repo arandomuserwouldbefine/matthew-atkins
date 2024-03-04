@@ -85,7 +85,7 @@ export default async function Home() {
       </section>
       <section id="contact-section" className="bg-black text-white p-6 lg:px-[40px] lg:p-10 flex items-center justify-center lg:py-36">
         <div className="text-center flex flex-col gap-5 items-center">
-          <h1 className="text-4xl lg:text-7xl kalnia">GET IN TOUCHE</h1>
+          <h1 className="text-4xl lg:text-7xl kalnia">GET IN TOUCH</h1>
           <p className="text-xl lg:text-2xl max-w-6xl text-justify sm:text-center">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
             minus aliquam explicabo. Esse harum minima eligendi nemo odio soluta

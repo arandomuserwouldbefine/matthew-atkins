@@ -31,7 +31,8 @@ export const DeleteBtn: React.FC<DeleteBtnProps> = ({ id, image_url }) => {
                     }),
                     headers:{
                         "Content-Type":"application/json"
-                    }
+                    },
+                    cache: 'no-store' 
                 })
             }}>Delete</Button>
             </Link>

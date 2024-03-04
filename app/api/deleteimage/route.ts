@@ -11,7 +11,6 @@ export async function POST(request: Request) {
             id: id
         }
     })
-    console.log(isAvail)
     if(isAvail){
         await db.images.delete({
             where:{
