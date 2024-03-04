@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useEdgeStore } from '@/lib/edgestore';
 import { createClient } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
+import { insertImageDetails } from '@/actions/insertimagedetails';
 
 
 export default function Page() {
@@ -39,8 +40,7 @@ export default function Page() {
               },
             });
 
-            const supabase = createClient("https://fkknmfzksbfjnrpymnpe.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZra25tZnprc2Jmam5ycHltbnBlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkyODY3MjksImV4cCI6MjAyNDg2MjcyOX0.Nqr-xh8npQxI-811UprfOvAja6GMacKcT1fK-Okwqw0")
-            const insertImageUrl = await supabase.from("photos").insert({"title":title,"description":description,"image_url":res.url})
+            insertImageDetails(title,description,res.url)
             setIsDisabled(false)
 
           }

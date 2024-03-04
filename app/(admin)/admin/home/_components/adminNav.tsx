@@ -15,7 +15,7 @@ import {
   
 import Link from "next/link"
 
-export const AdminNav = async ()=>{
+export const AdminNav =  ()=>{
     return(
         <>
             <div className="w-full flex items-center justify-between p-3 bg-slate-200">

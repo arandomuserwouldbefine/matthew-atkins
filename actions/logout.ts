@@ -4,4 +4,5 @@ import { cookies } from "next/headers"
 
 export const logOut = async ()=>{
     cookies().delete("auth")
+    return redirect("/admin/login")
 }
