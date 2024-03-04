@@ -15,8 +15,7 @@ export default function ImagesSlider() {
   const [swiper, setSwiper] = useState<any>(null);
   const [thumbPositions, setThumbPositions] = useState<number>(0);
 
-  useEffect(() => {
-  }, [swiper]);
+  useEffect(() => {}, [swiper]);
 
   const images = [
     { id: 0, source: "/assets/image0.jpg" },
@@ -24,6 +23,24 @@ export default function ImagesSlider() {
     { id: 2, source: "/assets/image2.jpg" },
     { id: 3, source: "/assets/image3.jpg" },
   ];
+
+  useEffect(() => {
+    async function getImages() {
+      try {
+        const res = await fetch("/api/images", {
+          method : "POST",
+          headers : {
+            "Content-type" : "Application/json"
+          }
+        });
+        const data = await res.json();
+        console.log(data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getImages();
+  }, []);
 
   const liWidth = 84;
 
@@ -35,17 +52,16 @@ export default function ImagesSlider() {
   };
 
   const handleSlideChanges = () => {
-    console.log(swiper)
-    const sliderAt = swiper.activeIndex
-    setThumbPositions(sliderAt)
-  }
+    console.log(swiper);
+    const sliderAt = swiper.activeIndex;
+    setThumbPositions(sliderAt);
+  };
 
   const handleDownload = () => {
-    //Replace with image url
-    const imageUrl = 'path/to/your/image.jpg';
-    const link = document.createElement('a');
+    const imageUrl = "path/to/your/image.jpg";
+    const link = document.createElement("a");
     link.href = imageUrl;
-    link.download = 'downloaded_image.jpg';
+    link.download = "downloaded_image.jpg";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -61,7 +77,10 @@ export default function ImagesSlider() {
         </span>
         <div className="flex items-center gap-9">
           <span className="inline-flex items-center justify-center w-10 aspect-square bg-[rgba(0,0,0,0.3)] rounded-full">
-            <Link href="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg" target="_blank">
+            <Link
+              href="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+              target="_blank"
+            >
               <FaExternalLinkAlt />
             </Link>
           </span>
@@ -73,12 +92,18 @@ export default function ImagesSlider() {
         </div>
       </div>
       <div className="absolute z-10 max-w-screen-lg top-1/2 left-1/2 transform -translate-x-1/2 w-full flex items-center justify-between">
-        <button className="border border-slate-800 w-10 aspect-square rounded-full text-white bg-[rgba(0,0,0,0.3)]" onClick={() => swiper.slidePrev()}>
+        <button
+          className="border border-slate-800 w-10 aspect-square rounded-full text-white bg-[rgba(0,0,0,0.3)]"
+          onClick={() => swiper.slidePrev()}
+        >
           <span className="inline-flex items-center justify-center w-full h-full">
             <FaChevronLeft />
           </span>
         </button>
-        <button className="border border-slate-800 w-10 aspect-square rounded-full text-white bg-[rgba(0,0,0,0.3)]" onClick={() => swiper.slideNext()}>
+        <button
+          className="border border-slate-800 w-10 aspect-square rounded-full text-white bg-[rgba(0,0,0,0.3)]"
+          onClick={() => swiper.slideNext()}
+        >
           <span className="inline-flex items-center justify-center w-full h-full">
             <FaChevronRight />
           </span>
