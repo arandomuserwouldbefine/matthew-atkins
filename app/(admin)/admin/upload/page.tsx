@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { insertImageDetails } from '@/actions/insertimagedetails';
 
 
-export default function Page() {
+export default function Upload() {
   const [file, setFile] = React.useState<File>();
   const [isDisabled, setIsDisabled] = React.useState(false)
   const { edgestore } = useEdgeStore(); 
