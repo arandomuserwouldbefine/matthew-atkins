@@ -1,5 +1,4 @@
 "use server"
-import { PrismaClient } from "@prisma/client"
 import { db } from "@/lib/db"
 
 export const insertImageDetails =async (title: string,description: string,image_url: string)=>{
@@ -10,5 +9,4 @@ export const insertImageDetails =async (title: string,description: string,image_
           image_url: image_url
         }
       })
-    
 } 

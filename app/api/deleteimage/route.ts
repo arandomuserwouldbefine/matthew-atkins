@@ -1,9 +1,6 @@
 import { db } from "@/lib/db"
-import { PrismaClient } from "@prisma/client"
-import { cookies } from "next/headers"
 
 export async function POST(request: Request) {
-    cookies()
     const {id} =  await request.json()
 
     const isAvail = await db.images.findFirst({

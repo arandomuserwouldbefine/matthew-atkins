@@ -5,6 +5,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 import { createClient } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
 import { insertImageDetails } from '@/actions/insertimagedetails';
+import { redirect } from 'next/navigation';
 
 
 export default function Upload() {
@@ -40,6 +41,7 @@ export default function Upload() {
             });
 
             insertImageDetails(title,description,res.url)
+            
             setIsDisabled(false)
 
           }
