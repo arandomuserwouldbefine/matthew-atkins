@@ -88,3 +88,7 @@ html
 .kalnia{
   font-family: var(--font-kalnia);
 }
+
+.darkBottomToTopGrad{
+  background: linear-gradient(to bottom, transparent ,rgba(0,0,0,.6));
+}
