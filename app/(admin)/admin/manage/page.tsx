@@ -8,7 +8,6 @@ import RemoveBtn from "@/components/removeBtn"
 const url = process.env.URL
 const protocol = process.env.PROTOCOL
 
-cookies()
 export const dynamic = 'force-dynamic'
 async function fetchImages(){
     const allItems = await fetch(`${protocol}://${url}/api/images`, { cache: 'no-store' })
