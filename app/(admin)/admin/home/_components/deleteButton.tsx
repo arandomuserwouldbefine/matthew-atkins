@@ -6,26 +6,35 @@ import Link from "next/link"
 import { useEdgeStore } from "@/lib/edgestore"
 import { PrismaClient } from "@prisma/client"
 import { db } from "@/lib/db"
+import { cookies } from "next/headers"
 
 interface DeleteBtnProps {
     id: string;
     image_url: string;
 }
 
+
+
 export const DeleteBtn: React.FC<DeleteBtnProps> = ({ id, image_url }) => {
     const {edgestore} = useEdgeStore()
     return (
         <div>
+            <Link href="/admin/home">
             <Button variant="destructive" size="sm" onClick={async()=>{
                 await edgestore.publicFiles.delete({
                     url: image_url,
                   });
-                await db.images.delete({
-                    where:{
-                        id:id
+                const deleteRecord = await fetch("/api/deleteimage",{
+                    method: "POST",
+                    body: JSON.stringify({
+                        "id":id,
+                    }),
+                    headers:{
+                        "Content-Type":"application/json"
                     }
                 })
             }}>Delete</Button>
+            </Link>
            
         </div>
     );

@@ -10,7 +10,6 @@ export default function ImagesSlider() {
   const [thumbPositions, setThumbPositions] = useState<number>(0);
 
   useEffect(() => {
-    console.log(swiper);
   }, [swiper]);
 
   const images = [

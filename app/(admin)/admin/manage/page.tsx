@@ -11,7 +11,6 @@ const protocol = process.env.PROTOCOL
 async function fetchImages(){
     cookies()
     const allItems = await db.images.findMany()
-    console.log(allItems.length)
     return allItems
 }
 
