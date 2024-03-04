@@ -1,7 +1,6 @@
-"use server"
 import { db } from "@/lib/db"
-
-export const insertImageDetails =async (title: string,description: string,image_url: string)=>{
+export async function POST(request:Request) {
+    const {title,description,image_url} = await request.json()
     await db.images.create({
         data:{
           title: title,
@@ -9,4 +8,5 @@ export const insertImageDetails =async (title: string,description: string,image_
           image_url: image_url
         }
       })
-} 
+    
+}
