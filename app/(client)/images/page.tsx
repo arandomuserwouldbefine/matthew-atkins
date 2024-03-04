@@ -5,7 +5,7 @@ import "swiper/css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function page() {
+export default function Images() {
   const [swiper, setSwiper] = useState<any>(null);
   const [thumbPositions, setThumbPositions] = useState<number>(0);
 
