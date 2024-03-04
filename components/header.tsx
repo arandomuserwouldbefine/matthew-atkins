@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FiSun } from "react-icons/fi";
 import { IoMoonSharp } from "react-icons/io5";
 
-export default function Header() {
+export default function Header({ isContactInViewport } : { isContactInViewport : boolean }) {
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useState(false);
 
@@ -25,13 +25,13 @@ export default function Header() {
         <li>
           <Link
             href="/"
-            className={pathname == "/" ? "border-b-[3px] border-blue-600" : ""}
+            className={(pathname == "/" && !isContactInViewport) ? "border-b-[3px] border-blue-600" : ""}
           >
             About
           </Link>
         </li>
         <li>
-          <a href="#contact-section">Contact</a>
+          <a href="#contact-section" className={isContactInViewport ? "border-b-[3px] border-blue-600" : ""}>Contact</a>
         </li>
         <li className="flex items-center">
           <button onClick={handleDarkModeChange}>

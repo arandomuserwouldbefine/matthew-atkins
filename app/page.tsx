@@ -1,14 +1,40 @@
+'use client'
+
 import Footer from "@/components/Footer";
 import Header from "@/components/header";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
-export default async function Home() {
+export default function Home() {
+  const [isContactInViewport, setIsContactInViewport] = useState(false);
+  const contactRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsContactInViewport(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.5 } // Adjust the threshold as needed
+    );
+
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
+
+    return () => {
+      if (contactRef.current) {
+        observer.unobserve(contactRef.current);
+      }
+    };
+  }, []);
   return (
     <main>
-      <section className="bg-black text-white p-2 py-5 pt-[50px]">
+      <section id="main-page" className="bg-black text-white p-2 py-5 pt-[50px]">
         <div className="flex items-center justify-center fixed top-[20px] w-full z-[9999]">
-          <Header />
+          <Header isContactInViewport={isContactInViewport} />
         </div>
         <div className="kalnia text-[16.8vw] text-center sm:leading-[300px] leading-[200px]">
           <h1>MATTHEW</h1>
@@ -83,7 +109,11 @@ export default async function Home() {
           })}
         </div>
       </section>
-      <section id="contact-section" className="bg-black text-white p-6 lg:px-[40px] lg:p-10 flex items-center justify-center lg:py-36">
+      <section
+        ref={contactRef}
+        id="contact-section"
+        className="bg-black text-white p-6 lg:px-[40px] lg:p-10 flex items-center justify-center lg:py-36"
+      >
         <div className="text-center flex flex-col gap-5 items-center">
           <h1 className="text-4xl lg:text-7xl kalnia">GET IN TOUCHE</h1>
           <p className="text-xl lg:text-2xl max-w-6xl text-justify sm:text-center">
