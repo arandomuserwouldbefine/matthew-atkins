@@ -5,7 +5,7 @@ import { useEdgeStore } from '@/lib/edgestore';
 import { createClient } from '@supabase/supabase-js';
 import { Button } from '@/components/ui/button';
 import { insertImageDetails } from '@/actions/insertimagedetails';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 
 export default function Upload() {
@@ -14,6 +14,7 @@ export default function Upload() {
   const { edgestore } = useEdgeStore(); 
   const [title, setTitle] = React.useState("")
   const [description, setDescription] = React.useState("")
+  const router = useRouter()
   return (
     <>
     <div>
@@ -31,7 +32,8 @@ export default function Upload() {
         }}
       required/>
       <Button  disabled={isDisabled}
-        onClick={async () => {
+        onClick={async (e) => {
+          e.preventDefault()
           if (file) {
             const res = await edgestore.publicFiles.upload({
               file,
@@ -41,7 +43,7 @@ export default function Upload() {
             });
 
             insertImageDetails(title,description,res.url)
-            
+            router.push("/admin/manage")
             setIsDisabled(false)
 
           }

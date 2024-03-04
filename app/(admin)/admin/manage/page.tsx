@@ -3,10 +3,12 @@ import { AdminNav } from "../home/_components/adminNav"
 import { cookies } from "next/headers"
 import { db } from "@/lib/db"
 import { PrismaClient } from "@prisma/client"
-import { DeleteBtn } from "../home/_components/deleteButton"
+import Link from "next/link"
+import RemoveBtn from "@/components/removeBtn"
 const url = process.env.URL
 const protocol = process.env.PROTOCOL
 
+cookies()
 export const dynamic = 'force-dynamic'
 async function fetchImages(){
     const allItems = await fetch(`${protocol}://${url}/api/images`, { cache: 'no-store' })
@@ -17,9 +19,7 @@ async function fetchImages(){
 
 
 export default async function ManageImages() {
-    cookies()
     const images = await fetchImages();
-
     return (
         <>
             <div className="p-5">
@@ -34,8 +34,7 @@ export default async function ManageImages() {
                         <img src={image.image_url} height={50} width={50} />
                         <h1>{image.title}</h1>
                         <h2>{image.description}</h2>
-                        <DeleteBtn id={image.id} image_url={image.image_url} />
-
+                        <RemoveBtn id={image.id} image_url={image.image_url}/>
                 </div>
             )):
             <h1 className="font-bold text-center mt-8 text-3xl">No Images yet</h1>
