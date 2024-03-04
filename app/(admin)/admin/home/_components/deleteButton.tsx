@@ -19,7 +19,7 @@ export const DeleteBtn: React.FC<DeleteBtnProps> = ({ id, image_url }) => {
     const {edgestore} = useEdgeStore()
     return (
         <div>
-            <Link href="/admin/home">
+            <Link href="/admin/manage">
             <Button variant="destructive" size="sm" onClick={async()=>{
                 await edgestore.publicFiles.delete({
                     url: image_url,
