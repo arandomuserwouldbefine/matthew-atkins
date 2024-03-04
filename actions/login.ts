@@ -22,7 +22,6 @@ export const login =async (values: z.infer<typeof LoginSchema>) =>{
     // const email = "atkinsmatt10@gmail.com"
     // const password = "a4DdmlDSC6bK"
     const hashedPassword =  await hashPassword(password);
-    console.log(`hash: ${hashedPassword}\n`)
 
     const doesEmailAndPassExists = await db.user.findFirst({
         where:{

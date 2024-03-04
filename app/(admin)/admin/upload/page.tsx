@@ -36,7 +36,6 @@ export default function Upload() {
               file,
               onProgressChange: (progress) => {
                 setIsDisabled(true)
-                console.log(progress);
               },
             });
 
