@@ -6,8 +6,8 @@ import Link from "next/link";
 export default async function Home() {
   return (
     <main>
-      <section className="bg-black text-white p-2 py-5">
-        <div className="flex items-center justify-center">
+      <section className="bg-black text-white p-2 py-5 pt-[50px]">
+        <div className="flex items-center justify-center fixed top-[20px] w-full z-[9999]">
           <Header />
         </div>
         <div className="kalnia text-[16.8vw] text-center sm:leading-[300px] leading-[200px]">
@@ -69,19 +69,21 @@ export default async function Home() {
           {[...new Array(5)].map((_, index) => {
             return (
               <div className="max-h-[300px] w-full" key={index}>
-                <Image
-                  alt="work images"
-                  width={400}
-                  height={400}
-                  src={`/assets/image${index}.jpg`}
-                  className="w-full h-full object-cover rounded"
-                />
+                <Link href="/images">
+                  <Image
+                    alt="work images"
+                    width={400}
+                    height={400}
+                    src={`/assets/image${index}.jpg`}
+                    className="w-full h-full object-cover rounded"
+                  />
+                </Link>
               </div>
             );
           })}
         </div>
       </section>
-      <section className="bg-black text-white p-6 lg:px-[40px] lg:p-10 flex items-center justify-center lg:py-36">
+      <section id="contact-section" className="bg-black text-white p-6 lg:px-[40px] lg:p-10 flex items-center justify-center lg:py-36">
         <div className="text-center flex flex-col gap-5 items-center">
           <h1 className="text-4xl lg:text-7xl kalnia">GET IN TOUCHE</h1>
           <p className="text-xl lg:text-2xl max-w-6xl text-justify sm:text-center">
@@ -91,7 +93,7 @@ export default async function Home() {
             commodi quasi sapiente optio sunt est repellendus!
           </p>
           <span className="block h-[2px] w-full bg-white max-w-screen-lg mx-auto"></span>
-          <button className="text-lg lg:text-xl border rounded-lg px-5 py-3">
+          <button className="text-lg lg:text-xl border rounded-lg px-5 py-3 hover:bg-slate-900 hover:ring-2">
             Contact Us!
           </button>
         </div>

@@ -11,34 +11,27 @@ export default function Header() {
   const [darkMode, setDarkMode] = useState(false);
 
   const handleDarkModeChange = () => {
-    setDarkMode(!darkMode)
-    if(!darkMode){
-      document.querySelector("html")?.classList.add("dark")
-    }else{
-      document.querySelector("html")?.classList.remove("dark")
+    setDarkMode(!darkMode);
+    if (!darkMode) {
+      document.querySelector("html")?.classList.add("dark");
+    } else {
+      document.querySelector("html")?.classList.remove("dark");
     }
-  }
+  };
 
   return (
-    <div className="border rounded-full px-8 sm:px-10 py-3">
+    <div className="relative z-50 border bg-black rounded-full px-8 sm:px-10 py-3">
       <ul className="flex items-center gap-12 text-lg lg:text-xl">
         <li>
           <Link
             href="/"
-            className={pathname == "/" ? "border-b-2 border-blue-600" : ""}
+            className={pathname == "/" ? "border-b-[3px] border-blue-600" : ""}
           >
             About
           </Link>
         </li>
         <li>
-          <Link
-            href="/contact"
-            className={
-              pathname == "/contact" ? "border-b-2 border-blue-600" : ""
-            }
-          >
-            Contact
-          </Link>
+          <a href="#contact-section">Contact</a>
         </li>
         <li className="flex items-center">
           <button onClick={handleDarkModeChange}>
