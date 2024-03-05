@@ -1,7 +1,15 @@
 module.exports = {
-    logging:{
-        fetches:{
-            fullUrl: true,
-        },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "files.edgestore.dev",
+      },
+    ],
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
     },
-}
+  },
+};

@@ -17,7 +17,7 @@ export default function Home() {
           setIsContactInViewport(entry.isIntersecting);
         });
       },
-      { threshold: 0.5 } // Adjust the threshold as needed
+      { threshold: 0.5 } 
     );
 
     if (contactRef.current) {
