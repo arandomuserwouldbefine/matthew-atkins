@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
@@ -11,38 +12,36 @@ import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 
+type ImageObject = {
+  datetime: string;
+  description: string;
+  id: string;
+  image_url: string;
+  title: string;
+};
+
 export default function ImagesSlider() {
+  const liWidth = 84; //Thumb Width
+
   const [swiper, setSwiper] = useState<any>(null);
+
   const [thumbPositions, setThumbPositions] = useState<number>(0);
-
-  useEffect(() => {}, [swiper]);
-
-  const images = [
-    { id: 0, source: "/assets/image0.jpg" },
-    { id: 1, source: "/assets/image1.jpg" },
-    { id: 2, source: "/assets/image2.jpg" },
-    { id: 3, source: "/assets/image3.jpg" },
-  ];
+  const [images, setImages] = useState<ImageObject[]>([]);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function getImages() {
       try {
-        const res = await fetch("/api/images", {
-          method : "POST",
-          headers : {
-            "Content-type" : "Application/json"
-          }
-        });
+        const res = await fetch("/api/images");
         const data = await res.json();
-        console.log(data)
+        setImages(data.imageDetails);
       } catch (error) {
-        console.log(error);
+        //Error Message of images didnt fetched
+        setError("Cant Fetch Image Date, Please Try again later");
       }
     }
     getImages();
   }, []);
-
-  const liWidth = 84;
 
   const translation = `translateX(calc(50% - ${thumbPositions * liWidth}px))`;
 
@@ -52,24 +51,41 @@ export default function ImagesSlider() {
   };
 
   const handleSlideChanges = () => {
-    console.log(swiper);
     const sliderAt = swiper.activeIndex;
     setThumbPositions(sliderAt);
   };
 
-  const handleDownload = () => {
-    const imageUrl = "path/to/your/image.jpg";
-    const link = document.createElement("a");
-    link.href = imageUrl;
-    link.download = "downloaded_image.jpg";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleDownload = async () => {
+    const imageUrl = images[swiper.activeIndex].image_url;
+    try {
+      const response = await fetch(imageUrl);
+      if (!response.ok) throw new Error("Network response was not ok.");
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      // Set the name as you want
+      link.download = images[swiper.activeIndex].title;
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean-up
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Download failed:", error);
+    }
   };
 
   return (
     <div className="relative">
-      <div className="absolute top-5 z-10 flex items-center justify-between w-full max-w-screen-lg left-1/2 transform -translate-x-1/2 text-white">
+      <div className="absolute px-5 top-5 z-10 flex items-center justify-between w-full max-w-screen-lg left-1/2 transform -translate-x-1/2 text-white">
+        {error && (
+          <div className="px-5 rounded-sm bg-red-800 text-white text-xl font-semibold text-center absolute left-1/2 transform -translate-x-1/2">
+            {error}
+          </div>
+        )}
         <span className="inline-flex items-center justify-center w-10 aspect-square bg-[rgba(0,0,0,0.3)] rounded-full">
           <Link href="/">
             <RxCross2 />
@@ -78,7 +94,7 @@ export default function ImagesSlider() {
         <div className="flex items-center gap-9">
           <span className="inline-flex items-center justify-center w-10 aspect-square bg-[rgba(0,0,0,0.3)] rounded-full">
             <Link
-              href="https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg"
+              href={images[swiper?.activeIndex]?.image_url || "/"}
               target="_blank"
             >
               <FaExternalLinkAlt />
@@ -91,7 +107,7 @@ export default function ImagesSlider() {
           </span>
         </div>
       </div>
-      <div className="absolute z-10 max-w-screen-lg top-1/2 left-1/2 transform -translate-x-1/2 w-full flex items-center justify-between">
+      <div className="absolute px-5 z-10 max-w-screen-lg top-1/2 left-1/2 transform -translate-x-1/2 w-full flex items-center justify-between">
         <button
           className="border border-slate-800 w-10 aspect-square rounded-full text-white bg-[rgba(0,0,0,0.3)]"
           onClick={() => swiper.slidePrev()}
@@ -115,18 +131,19 @@ export default function ImagesSlider() {
         onSlideChange={handleSlideChanges}
         className="h-screen bg-black"
       >
-        {images.map((img) => (
-          <SwiperSlide key={img.id} className="darkBottomToTopGrad">
-            <Image
-              priority
-              src={img.source}
-              width={1400}
-              height={750}
-              className="h-full w-full object-contain object-center"
-              alt={img.source}
-            />
-          </SwiperSlide>
-        ))}
+        {images.length > 0 &&
+          images.map((img) => (
+            <SwiperSlide key={img.id} className="darkBottomToTopGrad">
+              <Image
+                priority
+                src={img.image_url}
+                width={1400}
+                height={750}
+                className="h-full w-full object-contain object-center"
+                alt={img.title}
+              />
+            </SwiperSlide>
+          ))}
       </Swiper>
       <div className="absolute left-0 bottom-4 z-10 w-full overflow-hidden">
         <ul
@@ -139,22 +156,23 @@ export default function ImagesSlider() {
             transition: "all 0.3s ease",
           }}
         >
-          {images.map((img, index) => (
-            <li key={img.id} className="w-[84px]">
-              <button
-                className="w-full h-full aspect-video"
-                onClick={() => handleThumbClick(index)}
-              >
-                <Image
-                  src={img.source}
-                  alt={img.source}
-                  width={84}
-                  height={56}
-                  className="h-full w-full object-cover rounded"
-                />
-              </button>
-            </li>
-          ))}
+          {images.length > 0 &&
+            images.map((img, index) => (
+              <li key={img.id} className="w-[84px]">
+                <button
+                  className="w-full h-full aspect-video"
+                  onClick={() => handleThumbClick(index)}
+                >
+                  <Image
+                    src={img.image_url}
+                    alt={img.title}
+                    width={84}
+                    height={56}
+                    className="h-full w-full object-cover rounded"
+                  />
+                </button>
+              </li>
+            ))}
         </ul>
       </div>
     </div>
