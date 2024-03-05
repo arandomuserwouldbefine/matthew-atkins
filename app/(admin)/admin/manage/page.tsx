@@ -36,6 +36,7 @@ export default async function ManageImages() {
                         <RemoveBtn id={image.id} image_url={image.image_url}/>
                 </div>
             )):
+            
             <h1 className="font-bold text-center mt-8 text-3xl">No Images yet</h1>
             }
             </div>
