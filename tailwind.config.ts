@@ -77,7 +77,6 @@ const config = {
       },
     },
   },
-  darkMode: "class",
   plugins: [require("tailwindcss-animate"),nextui()],
 } satisfies Config;
 
