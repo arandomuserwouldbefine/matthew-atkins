@@ -123,7 +123,7 @@ export default function Home() {
             commodi quasi sapiente optio sunt est repellendus!
           </p>
           <span className="block h-[2px] w-full bg-white max-w-screen-lg mx-auto"></span>
-          <Link href="mailto:custombana010@gmail.com?subject=Testing out mailto!&body=This is only a test!">
+          <Link href="mailto:atkinsmatt10@gmail.com?subject=Testing out mailto!&body=This is only a test!">
           <button className="text-lg lg:text-xl border rounded-lg px-5 py-3 hover:bg-slate-900 hover:ring-2">
             Contact Us!
           </button>
