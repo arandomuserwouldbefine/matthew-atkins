@@ -3,6 +3,7 @@ import React from 'react'
 import { SlideInFromBottom } from './animate/animation'
 
 export default function Footer() {
+  console.log("ko")
   return (
     <section className="p-2 lg:px-[40px] lg:py-[50px] sm:p-3">
         <SlideInFromBottom>
