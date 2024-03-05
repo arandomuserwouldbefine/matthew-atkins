@@ -1,14 +1,16 @@
 "use client"
-import { deleteRecord } from "@/actions/deleteRecord";
 import { useRouter } from "next/navigation";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 export default function RemoveBtn({ id, image_url }: { id: string; image_url: string }) {
     const router = useRouter()
+    const [isDisabled, setIsDisabled] = useState(false)
     const {edgestore} = useEdgeStore()
     const removeImage = async() =>{
         const confirmed = confirm("You sure ?")
         if(confirmed){
+            setIsDisabled(true)
             const resp = await fetch("https://matthew-atkins.vercel.app/api/images",{
                 method: "DELETE",
                 body: JSON.stringify({
@@ -22,11 +24,13 @@ export default function RemoveBtn({ id, image_url }: { id: string; image_url: st
                 await edgestore.publicFiles.delete({
                     url: image_url,
                   });
+                  setIsDisabled(false)
+
                 router.refresh()
             }
         }
     }
     return (
-        <Button variant="destructive" size="sm" onClick={removeImage}>Delete</Button>
+        <Button variant="destructive" size="sm" onClick={removeImage} disabled={isDisabled}>Delete</Button>
     );
 }
