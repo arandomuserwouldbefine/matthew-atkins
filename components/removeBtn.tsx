@@ -9,7 +9,7 @@ export default function RemoveBtn({ id, image_url }: { id: string; image_url: st
     const removeImage = async() =>{
         const confirmed = confirm("You sure ?")
         if(confirmed){
-            const resp = await fetch(`${process.env.PROTOCOL}://${process.env.URL}/api/images`,{
+            const resp = await fetch("https://matthew-atkins.vercel.app/api/images",{
                 method: "DELETE",
                 body: JSON.stringify({
                     id: id
@@ -24,6 +24,6 @@ export default function RemoveBtn({ id, image_url }: { id: string; image_url: st
         }
     }
     return (
-        <Button variant="destructive" size="sm" onClick={removeImage}>hello</Button>
+        <Button variant="destructive" size="sm" onClick={removeImage}>Delete</Button>
     );
 }
