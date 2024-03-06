@@ -45,9 +45,9 @@ export default async function ManageImages() {
                   alt={image.title}
                   className="w-full aspect-[3/2] object-cover rounded-md"
                 />
-                <h1 className="mt-2 font-semibold text-xl">{image.title}</h1>
-                <h2 className="my-2">{image.description}</h2>
-                <RemoveBtn id={image.id} image_url={image.image_url} />
+                <div className="mt-3">
+                  <RemoveBtn id={image.id} image_url={image.image_url} />
+                </div>
               </div>
             ))}
           </div>
