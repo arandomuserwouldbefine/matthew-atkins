@@ -19,6 +19,10 @@ export default function Upload() {
 
   const router = useRouter();
 
+  React.useEffect(() => {
+    console.log(file);
+  }, [file]);
+
   const handleUploadClick = (e: any) => {
     e.preventDefault();
     async function upload() {
@@ -63,7 +67,7 @@ export default function Upload() {
             required
             disabled={isDisabled}
           />
-
+          {file && <p className="line-clamp-1">{file.name}</p>}
           <label>
             <span className="cursor-pointer flex items-center text-lg gap-3 bg-slate-800 text-slate-100 px-3 py-2 rounded-md">
               <FaUpload /> Select Files
