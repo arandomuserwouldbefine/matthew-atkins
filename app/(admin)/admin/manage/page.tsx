@@ -16,6 +16,8 @@ async function fetchImages() {
   const allItems = await fetch(`${protocol}://${url}/api/images`, {
     cache: "no-store",
   });
+  console.log("ok");
+  
   const res = allItems.json();
   return res;
 }

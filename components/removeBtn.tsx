@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 export default function RemoveBtn({ id, image_url }: { id: string; image_url: string }) {
     const router = useRouter()
+
     const [isDisabled, setIsDisabled] = useState(false)
     const {edgestore} = useEdgeStore()
     const removeImage = async() =>{
