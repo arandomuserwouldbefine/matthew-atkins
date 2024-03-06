@@ -20,7 +20,7 @@ export const isAlreadyLoggedIn = async()=>{
     const authCookie = cookies().get("auth")?.value ?? ""
     const isLoggedIn = await isAuthenticated(authCookie)
     if(isLoggedIn){
-        return redirect("/admin/home")
+        return redirect("/admin/login")
     }
     return null
 }
