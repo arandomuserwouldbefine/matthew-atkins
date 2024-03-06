@@ -1,45 +1,60 @@
-import { Button } from "@/components/ui/button"
-import { AdminNav } from "../home/_components/adminNav"
-import { cookies } from "next/headers"
-import { db } from "@/lib/db"
-import { PrismaClient } from "@prisma/client"
-import Link from "next/link"
-import RemoveBtn from "@/components/removeBtn"
-const url = process.env.URL
-const protocol = process.env.PROTOCOL
+import { Button } from "@/components/ui/button";
+import { AdminNav } from "../home/_components/adminNav";
+import { cookies } from "next/headers";
+import { db } from "@/lib/db";
+import { PrismaClient } from "@prisma/client";
+import Link from "next/link";
 
-export const dynamic = 'force-dynamic'
-async function fetchImages(){
-    const allItems = await fetch(`${protocol}://${url}/api/images`, { cache: 'no-store' })
-    const res = allItems.json()
-    return res
+import RemoveBtn from "@/components/removeBtn";
+import Image from "next/image";
+const url = process.env.URL;
+const protocol = process.env.PROTOCOL;
+
+export const dynamic = "force-dynamic";
+
+async function fetchImages() {
+  const allItems = await fetch(`${protocol}://${url}/api/images`, {
+    cache: "no-store",
+  });
+  const res = allItems.json();
+  return res;
 }
 
-
+type ImageData = {
+  id: string;
+  title: string;
+  description: string;
+  image_url: string;
+  datetime: Date;
+};
 
 export default async function ManageImages() {
-    const images = await fetchImages();
-    return (
-        <>
-            <div className="p-5">
-            {images.imageDetails.length> 0?images.imageDetails.map((image: {
-                id: string,
-                title: string,
-                description: string,
-                image_url: string,
-                datetime: Date
-            }, index: number) => (
-                <div key={index} className="my-5 p-3 flex items-center justify-between border-2 border-gray-900">
-                        <img src={image.image_url} height={50} width={50} />
-                        <h1>{image.title}</h1>
-                        <h2>{image.description}</h2>
-                        <RemoveBtn id={image.id} image_url={image.image_url}/>
-                </div>
-            )):
-            
-            <h1 className="font-bold text-center mt-8 text-3xl">No Images yet</h1>
-            }
-            </div>
-        </>
-    );
+  const { imageDetails }: { imageDetails: ImageData[] } = await fetchImages();
+
+  return (
+    <>
+      <div className="p-5">
+        {imageDetails.length > 0 ? (
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {imageDetails.map((image, index) => (
+              <div key={index} className="w-full p-3 border rounded-md">
+                <Image
+                  src={image.image_url}
+                  height={500}
+                  width={350}
+                  alt={image.title}
+                  className="w-full aspect-[3/2] object-cover rounded-md"
+                />
+                <h1 className="mt-2 font-semibold text-xl">{image.title}</h1>
+                <h2 className="my-2">{image.description}</h2>
+                <RemoveBtn id={image.id} image_url={image.image_url} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <h1 className="font-bold text-center mt-8 text-3xl">No Images yet</h1>
+        )}
+      </div>
+    </>
+  );
 }
