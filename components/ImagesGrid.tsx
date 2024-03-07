@@ -55,7 +55,7 @@ export default function ImagesGrid() {
       {images &&
         images.map((img, index) => {
           return (
-            <div className="max-h-[300px] overflow-hidden w-full" key={index}>
+            <div className="max-h-[300px] overflow-hidden w-full rounded" key={index}>
               <Link href="/images" className="inline-block w-full h-full ">
                 <SlideInFromBottom className="h-full aspect-[3/2] w-full sm:w-auto">
                   <Image
