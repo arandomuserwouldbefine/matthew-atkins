@@ -1,8 +1,12 @@
-'use client'
+"use client";
 
+import CurveHeader from "@/components/CurveHeader";
 import Footer from "@/components/Footer";
 import ImagesGrid from "@/components/ImagesGrid";
-import { SlideInFromBottom, SlideInFromRight } from "@/components/animate/animation";
+import {
+  SlideInFromBottom,
+  SlideInFromRight,
+} from "@/components/animate/animation";
 import Header from "@/components/header";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +23,7 @@ export default function Home() {
           setIsContactInViewport(entry.isIntersecting);
         });
       },
-      { threshold: 0.5 } 
+      { threshold: 0.5 }
     );
 
     if (contactRef.current) {
@@ -34,35 +38,19 @@ export default function Home() {
   }, []);
   return (
     <main>
-      <section id="main-page" className="bg-black text-white p-2 py-5 pt-[50px]">
+      <section
+        id="main-page"
+        className="bg-black text-white p-2 py-5 pt-[50px]"
+      >
         <div className="flex items-center justify-center fixed top-[20px] w-full z-[9999]">
           <SlideInFromBottom>
-          <Header isContactInViewport={isContactInViewport} />
+            <Header isContactInViewport={isContactInViewport} />
           </SlideInFromBottom>
         </div>
         <SlideInFromBottom>
           <div className="kalnia text-[16.8vw] text-center sm:leading-[300px] leading-[200px]">
             <h1>MATTHEW</h1>
-            <h1 className="">
-              <span className="inline-block transform -rotate-[25deg] sm:-rotate-[11deg]">
-                A
-              </span>
-              <span className="inline-block transform -rotate-[15deg] sm:-rotate-[8deg] -translate-y-6 sm:-translate-y-9">
-                T
-              </span>
-              <span className="inline-block transform -rotate-[8deg] sm:-rotate-[3deg] -translate-y-10 sm:-translate-y-14">
-                K
-              </span>
-              <span className="inline-block transform rotate-[8deg] sm:rotate-[3deg] -translate-y-10 sm:-translate-y-14">
-                I
-              </span>
-              <span className="inline-block transform rotate-[15deg] sm:rotate-[8deg] -translate-y-6 sm:-translate-y-9">
-                N
-              </span>
-              <span className="inline-block transform rotate-[25deg] sm:rotate-[11deg]">
-                S
-              </span>
-            </h1>
+            <CurveHeader />
             <p className="text-lg">Scroll Down</p>
           </div>
         </SlideInFromBottom>
@@ -117,19 +105,20 @@ export default function Home() {
           </SlideInFromBottom>
           <SlideInFromBottom>
             <p className="text-xl lg:text-2xl max-w-6xl text-justify sm:text-center">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus
-              minus aliquam explicabo. Esse harum minima eligendi nemo odio soluta
-              ducimus cumque veritatis doloremque nisi, atque dicta, porro quis,
-              commodi quasi sapiente optio sunt est repellendus!
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Temporibus minus aliquam explicabo. Esse harum minima eligendi
+              nemo odio soluta ducimus cumque veritatis doloremque nisi, atque
+              dicta, porro quis, commodi quasi sapiente optio sunt est
+              repellendus!
             </p>
           </SlideInFromBottom>
           <span className="block h-[2px] w-full bg-white max-w-screen-lg mx-auto"></span>
           <Link href="mailto:atkinsmatt10@gmail.com?subject=Testing out mailto!&body=This is only a test!">
-          <SlideInFromBottom>
-            <button className="text-lg lg:text-xl border rounded-lg px-5 py-3 hover:bg-slate-900 hover:ring-2">
-              Contact Us!
-            </button>
-          </SlideInFromBottom>
+            <SlideInFromBottom>
+              <button className="shadow-[0_0_0_3px_#000000_inset] px-6 py-2 bg-transparent border border-white text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400">
+                Contact Us
+              </button>
+            </SlideInFromBottom>
           </Link>
         </div>
       </section>
