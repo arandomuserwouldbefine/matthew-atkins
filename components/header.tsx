@@ -25,13 +25,13 @@ export default function Header({ isContactInViewport } : { isContactInViewport :
         <li>
           <Link
             href="/"
-            className={(pathname == "/" && !isContactInViewport) ? "border-b-[3px] border-blue-600" : ""}
+            className={(pathname == "/" && !isContactInViewport) ? "border-b-[3px] border-white" : ""}
           >
             About
           </Link>
         </li>
         <li>
-          <a href="#contact-section" className={isContactInViewport ? "border-b-[3px] border-blue-600" : ""}>Contact</a>
+          <a href="#contact-section" className={isContactInViewport ? "border-b-[3px] border-white" : ""}>Contact</a>
         </li>
         <li className="flex items-center">
           <button onClick={handleDarkModeChange}>
