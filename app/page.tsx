@@ -2,7 +2,7 @@
 
 import Footer from "@/components/Footer";
 import ImagesGrid from "@/components/ImagesGrid";
-import { SlideInFromBottom, SlideInFromRight } from "@/components/animate/animation";
+import { SlideInFromBottom, SlideInFromRight, SlideInFromTop } from "@/components/animate/animation";
 import Header from "@/components/header";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +36,9 @@ export default function Home() {
     <main>
       <section id="main-page" className="bg-black text-white p-2 py-5 pt-[50px]">
         <div className="flex items-center justify-center fixed top-[20px] w-full z-[9999]">
-          <Header isContactInViewport={isContactInViewport} />
+          <SlideInFromTop>
+            <Header isContactInViewport={isContactInViewport} />
+          </SlideInFromTop>
         </div>
         <SlideInFromBottom>
           <div className="kalnia text-[16.8vw] text-center sm:leading-[300px] leading-[200px]">
