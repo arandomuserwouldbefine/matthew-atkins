@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 export default function Home() {
   const [isContactInViewport, setIsContactInViewport] = useState(false);
   const contactRef = useRef(null);
-
+  console.log("Done...")
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
