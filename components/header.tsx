@@ -21,7 +21,7 @@ export default function Header({ isContactInViewport } : { isContactInViewport :
 
   return (
     <div className="relative z-50 border bg-black rounded-full px-8 sm:px-10 py-3">
-      <ul className="flex items-center gap-12 text-lg lg:text-xl">
+      <ul className="flex items-center gap-12 text-sm sm:text-lg lg:text-xl">
         <li>
           <Link
             href="/"
