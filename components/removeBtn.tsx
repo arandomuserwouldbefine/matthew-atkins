@@ -13,7 +13,7 @@ export default function RemoveBtn({ id, image_url }: { id: string; image_url: st
         const confirmed = confirm("You sure ?")
         if(confirmed){
             setIsDisabled(true)
-            const resp = await fetch("https://matthew-atkins.vercel.app/api/images",{
+            const resp = await fetch("http://atkins.photos/api/images",{
                 method: "DELETE",
                 body: JSON.stringify({
                     id: id

@@ -7,16 +7,15 @@ import Link from "next/link";
 
 import RemoveBtn from "@/components/removeBtn";
 import Image from "next/image";
-const url = process.env.URL;
-const protocol = process.env.PROTOCOL;
+
 
 export const dynamic = "force-dynamic";
 
 async function fetchImages() {
-  const allItems = await fetch(`${protocol}://${url}/api/images`, {
+  const allItems = await fetch(`https://atkins.photos/api/images`, {
     cache: "no-store",
   });
-  
+
   const res = allItems.json();
   return res;
 }

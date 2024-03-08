@@ -32,7 +32,7 @@ export default function ImagesSlider() {
   useEffect(() => {
     async function getImages() {
       try {
-        const res = await fetch("/api/images");
+        const res = await fetch("https://atkins.photos/api/images");
         const data = await res.json();
         setImages(data.imageDetails);
       } catch (error) {
