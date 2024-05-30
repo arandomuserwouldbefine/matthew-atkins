@@ -12,7 +12,7 @@ import Image from "next/image";
 export const dynamic = "force-dynamic";
 
 async function fetchImages() {
-  const allItems = await fetch(`https://atkins.photos/api/images`, {
+  const allItems = await fetch(`https://matthew-atkins.vercel.app/images`, {
     cache: "no-store",
   });
 
